@@ -79,3 +79,8 @@ GET http://{{localhost}}/SalesOrdersHeaders/$count
 # Paginando os registros
 
 GET http://{{localhost}}/SalesOrdersHeaders?$skip=5&$top=5
+
+###
+# Buscando dados com search
+
+GET http://{{localhost}}/SalesOrdersHeaders?$search=4dvhl

@@ -30,6 +30,11 @@ Content-Type: application/json
 PUT http://{{localhost}}//Customers(id={{id}})
 Content-Type: application/json
 
+###
+# Buscando dados com search
+
+GET http://{{localhost}}/Customers?$search=14101219
+
 {
     "firstName": "Jhon"
 }
