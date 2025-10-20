@@ -1,0 +1,63 @@
+@localhost=localhost:4004/odata/v4/main
+@id=6eb6305e-1d12-49a5-9e59-d0444d813079
+@customerId=8a0d371a-7196-489a-8362-ab3de218e158
+
+@productId=53e109ce-4632-4924-b4c7-cff9ea6e01ee
+
+GET http://{{localhost}}/SalesOrdersHeaders?$filter=id eq {{id}}&$expand=items
+Content-Type: application/json
+
+###
+
+POST http://{{localhost}}/SalesOrdersHeaders
+Content-Type: application/json
+
+{
+    "id": "{{id}}",
+    "customer_id": "{{customerId}}",
+    "totalAmount": 398,
+    "items": [
+        {
+            "id": "ac5e115d-2f90-46af-91c6-a575a0145f2f",
+            "header_id": "{{id}}",
+            "product_id": "{{productId}}",
+            "quantity": "10",
+            "price": "2.99"
+        },
+        {
+           "id": "3b4b328f-5131-47e8-9c30-ace3ddb8ebb9",
+            "header_id": "{{id}}",
+            "product_id": "{{productId}}",
+            "quantity": "5",
+            "price": "1.99" 
+        }
+    ]
+}
+
+###
+
+DELETE  http://{{localhost}}/SalesOrdersHeaders(id={{id}})
+Content-Type: application/json
+
+###
+
+PUT http://{{localhost}}/SalesOrdersHeaders(id={{id}})
+Content-Type: application/json
+
+###
+
+# Buscar todos os pedidos maiores ou iguais a 2000000 milhões. 
+
+GET http://localhost:4004/odata/v4/main/SalesOrdersHeaders?$filter=totalAmount ge 2000000
+
+###
+# Buscar todos os pedidos menores ou iguais a 2000000 milhões.
+GET http://localhost:4004/odata/v4/main/SalesOrdersHeaders?$filter=totalAmount le 2000000
+
+###
+# Expandindo os items
+GET http://localhost:4004/odata/v4/main/SalesOrdersHeaders?$expand=items($expand=product),customer
+
+###
+# Expandindo os items, produtos e customers e filtrando
+GET http://localhost:4004/odata/v4/main/SalesOrdersHeaders?$expand=items($expand=product;$filter=quantity le 30),customer

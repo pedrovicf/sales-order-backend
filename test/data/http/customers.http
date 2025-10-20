@@ -1,0 +1,35 @@
+@localhost=localhost:4004/odata/v4/main
+@id=8a0d371a-7196-489a-8362-ab3de218e158
+
+
+
+GET http://{{localhost}}/Customers
+Content-Type: application/json
+
+
+###
+
+POST http://{{localhost}}/Customers
+Content-Type: application/json
+
+{
+    "id": "{{id}}",
+    "firstName": "Pedro",
+    "lastName": "Victor",
+    "email": "pedro.assis@numenit.com"
+}
+
+###
+
+
+DELETE  http://{{localhost}}/Customers(id={{id}})
+Content-Type: application/json
+
+###
+
+PUT http://{{localhost}}//Customers(id={{id}})
+Content-Type: application/json
+
+{
+    "firstName": "Jhon"
+}
