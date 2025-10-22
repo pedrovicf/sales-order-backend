@@ -1,5 +1,5 @@
 @localhost=localhost:4004/odata/v4/main
-@id=8a0d371a-7196-489a-8362-ab3de218e158
+@id=14101219-2c0f-485b-8475-f09253327210
 
 
 
@@ -27,7 +27,7 @@ Content-Type: application/json
 
 ###
 
-PUT http://{{localhost}}//Customers(id={{id}})
+PUT http://{{localhost}}/Customers(id={{id}})
 Content-Type: application/json
 
 ###
