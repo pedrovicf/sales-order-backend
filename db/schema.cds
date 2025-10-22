@@ -6,9 +6,9 @@ entity SalesOrdersHeaders: managed {
     key id: UUID;
     customer: Association to Customers;
     totalAmount: Decimal(15,2);
-    items: Composition of many SalesOrdersItem on items.header = $self;
+    items: Composition of many SalesOrdersItems on items.header = $self;
 }
-entity SalesOrdersItem {
+entity SalesOrdersItems {
     key id: UUID;
     header: Association to SalesOrdersHeaders;
     product: Association to Products;

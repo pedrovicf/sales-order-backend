@@ -1,10 +1,10 @@
 @localhost=localhost:4004/odata/v4/main
-@id=6eb6305e-1d12-49a5-9e59-d0444d813079
+@id=7365799a-c927-4b64-a68e-91211336db0f
 @customerId=14101219-2c0f-485b-8475-f09253327210
 
-@productId1=53e109ce-4632-4924-b4c7-cff9ea6e01ee 
+@productId1=22731461-6939-40b2-8dda-f7e3ee0ca285 
 # produto em estoque
-@productId2=22731459-edea-4622-b51a-c2e0ce91471a
+@productId2=22731462-1c31-4f16-b66b-3197616dcbba
 GET http://{{localhost}}/SalesOrdersHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
 
@@ -15,22 +15,22 @@ Content-Type: application/json
 
 {
     "id": "{{id}}",
-    "customer_id": "{{customerId}}",
+    "customer_id": "14101222-5583-4b56-b297-d18a026c34fb",
     "totalAmount": 398,
     "items": [
         {
             "id": "ac5e115d-2f90-46af-91c6-a575a0145f2f",
             "header_id": "{{id}}",
             "product_id": "{{productId1}}",
-            "quantity": "10",
-            "price": "2.99"
+            "quantity": 10,
+            "price": 2.99
         },
         {
            "id": "3b4b328f-5131-47e8-9c30-ace3ddb8ebb9",
             "header_id": "{{id}}",
             "product_id": "{{productId2}}",
-            "quantity": "5",
-            "price": "1.99" 
+            "quantity": 5,
+            "price": 1.99 
         }
     ]
 }
