@@ -7,11 +7,14 @@
 @productId2=22731460-75dd-4203-90bd-672a86dbcba0
 GET http://{{localhost}}/SalesOrderHeaders?$filter=id eq {{id}}&$expand=items
 Content-Type: application/json
+Authorization: Basic pedro:130269
+
 
 ###
 
 POST http://{{localhost}}/SalesOrderHeaders
 Content-Type: application/json
+Authorization: Basic pedro:130269
 
 {
     #"id": "{{id}}",
@@ -37,51 +40,72 @@ Content-Type: application/json
 
 ###
 
-DELETE  http://{{localhost}}/SalesOrdersHeaders(id={{id}})
+DELETE  http://{{localhost}}/SalesOrderHeaders(id={{id}})
 Content-Type: application/json
+Authorization: Basic dinei:130269
+
 
 ###
 
-PUT http://{{localhost}}/SalesOrdersHeaders(id={{id}})
+PUT http://{{localhost}}/SalesOrderHeaders(id={{id}})
 Content-Type: application/json
+Authorization: Basic pedro:130269
+
 
 ###
 
 # Buscar todos os pedidos maiores ou iguais a 2000000 milhões. 
 
-GET http://{{localhost}}/SalesOrdersHeaders?$filter=totalAmount ge 2000000
+GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount ge 2000000
+Authorization: Basic pedro:130269
+
 
 ###
 # Buscar todos os pedidos menores ou iguais a 2000000 milhões.
-GET http://{{localhost}}/SalesOrdersHeaders?$filter=totalAmount le 2000000
+GET http://{{localhost}}/SalesOrderHeaders?$filter=totalAmount le 2000000
+Authorization: Basic pedro:130269
+
 
 ###
 # Expandindo os items
-GET http://{{localhost}}/SalesOrdersHeaders?$expand=items($expand=product),customer
+GET http://{{localhost}}/SalesOrderHeaders?$expand=items($expand=product),customer
+Authorization: Basic pedro:130269
+
 
 ###
 # Expandindo os items, produtos e customers e filtrando
-GET http://{{localhost}}/SalesOrdersHeaders?$expand=items($expand=product;$filter=quantity le 30),customer
+GET http://{{localhost}}/SalesOrderHeaders?$expand=items($expand=product;$filter=quantity le 30),customer
+Authorization: Basic pedro:130269
+
 
 ###
 # Selecionar somente customer, id e sales order header
-GET http://{{localhost}}/SalesOrdersHeaders?$expand=items($expand=product;$filter=quantity le 30),customer
+GET http://{{localhost}}/SalesOrderHeaders?$expand=items($expand=product;$filter=quantity le 30),customer
+Authorization: Basic pedro:130269
+
 
 ###
 # Selecionar somente customer, id do sales order header
-GET http://{{localhost}}/SalesOrdersHeaders?$select=id,customer&$expand=customer($select=email)
+GET http://{{localhost}}/SalesOrderHeaders?$select=id,customer&$expand=customer($select=email)
+Authorization: Basic pedro:130269
+
 
 ###
 # Descobrindo a quantidade de registros
 
-GET http://{{localhost}}/SalesOrdersHeaders/$count
+GET http://{{localhost}}/SalesOrderHeaders/$count
+Authorization: Basic pedro:130269
+
 
 ###
 # Paginando os registros
 
-GET http://{{localhost}}/SalesOrdersHeaders?$skip=5&$top=5
+GET http://{{localhost}}/SalesOrderHeaders?$skip=5&$top=5
+Authorization: Basic pedro:130269
+
 
 ###
 # Buscando dados com search
 
-GET http://{{localhost}}/SalesOrdersHeaders?$search=4dvhl
+GET http://{{localhost}}/SalesOrderHeaders?$search=4dvhl
+Authorization: Basic pedro:130269
