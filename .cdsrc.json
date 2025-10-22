@@ -2,16 +2,16 @@
     "[development]": {
         "requires": {
             "db": {
-                "credentials":{
+                "credentials": {
                     "database": ":memory:"
                 },
                 "kind": "sqlite"
             },
             "auth": {
                 "kind": "basic",
-                "user": {
+                "users": {
                     "pedro":{
-                        "password": "Inicial@12345",
+                        "password": "130269",
                         "roles": ["admin"],
                         "attr": {
                             "id": 1,
