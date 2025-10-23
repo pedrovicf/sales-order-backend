@@ -1,5 +1,5 @@
 @localhost=localhost:4004/odata/v4/main
-@id=73658052-2b92-427a-bb5e-9a2a9406931f
+@id=3227afd2-1de1-40b8-9af9-351d7f9be023
 @customerId=14101219-2c0f-485b-8475-f09253327210
 
 @productId1=22731459-edea-4622-b51a-c2e0ce91471a 
@@ -19,7 +19,6 @@ Authorization: Basic pedro:130269
 {
     #"id": "{{id}}",
     "customer_id": "14101219-2c0f-485b-8475-f09253327210",
-    "totalAmount": 398,
     "items": [
         {
             "id": "22731459-edea-4622-b51a-c2e0ce91471a",

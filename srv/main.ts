@@ -1,9 +1,10 @@
 import cds, { Request, Service } from '@sap/cds';
 import { Customers, Product, Products, SalesOrderHeaders, SalesOrdersItem, SalesOrdersItems } from '@models/sales';
+import { log } from 'console';
 
 export default (service: Service) => { 
       service.before('READ', '*', (request: Request) => {
-        if (!request.user.is('read_only_user')) {
+        if (!request.user.is('admin')) {
         return request.reject(403, 'Não autorizado');
         }
     });
@@ -46,6 +47,12 @@ export default (service: Service) => {
             return request.reject(400, `Produto ${dbProduct.name}(${dbProduct.id}) sem estoque disponivel`);
          }
         }
+        let totalAmount = 0;
+        items.forEach(item => {
+            totalAmount += (item.price as number) * (item.quantity as number);
+        });
+        console.log(totalAmount);
+        request.data.totalAmount = totalAmount;
     });
     service.after('CREATE', 'SalesOrderHeaders', async (results: SalesOrderHeaders) => {
         const headersAsArray = Array.isArray(results) ? results : [results] as SalesOrderHeaders;
