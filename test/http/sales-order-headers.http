@@ -17,7 +17,7 @@ Content-Type: application/json
 Authorization: Basic pedro:130269
 
 {
-    #"id": "{{id}}",
+    "id": "{{id}}",
     "customer_id": "14101219-2c0f-485b-8475-f09253327210",
     "items": [
         {
