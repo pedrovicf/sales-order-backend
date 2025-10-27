@@ -7,7 +7,7 @@ type SalesOrderHeaderProps = {
     items: SalesOrderItemModel[];
 }
 
-type SalesOrderHeaderPropsWithoutTotalAmount = Omit<SalesOrderHeaderProps, 'totalAmount'>;
+type SalesOrderHeaderPropsWithoutTotalAmount = Omit<SalesOrderHeaderProps, 'id' | 'totalAmount'>;
 
 type CreationPayload = {
     customer_id: SalesOrderHeaderProps['customerId'];
@@ -17,7 +17,7 @@ type CreationPayload = {
 type CreationPayloadValidationResults = {
     hasError: boolean;
     error?: Error;
-}
+};
 
 export class SalesOrderHeaderModel {
     constructor(private props: SalesOrderHeaderProps) {}
@@ -25,6 +25,7 @@ export class SalesOrderHeaderModel {
     public static create(props: SalesOrderHeaderPropsWithoutTotalAmount): SalesOrderHeaderModel {
         return new SalesOrderHeaderModel({
         ...props,
+        id: crypto.randomUUID(),
         totalAmount: 0
         });
     }
