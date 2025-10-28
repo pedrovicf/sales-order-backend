@@ -6,6 +6,8 @@ export type CreationPayloadValidationResults = {
     error?: Error;
 };
 
-export interface SalesOrderHeaderService {
+export interface SalesOrderHeaderController {
     beforeCreate(params: SalesOrderHeader): Promise<CreationPayloadValidationResults>;
 }
+
+

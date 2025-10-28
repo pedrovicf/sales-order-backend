@@ -101,25 +101,25 @@ public get items() {
             }
         }
         return {
-            hasError: true
+            hasError: false
             }
     }
 
     public calculateTotalAmount(): number {
        
-        this.totalAmount = 0;
+        let totalAmount = 0;
         this.items.forEach(item => {
-            this.totalAmount += (item.price as number) * (item.quantity as number);
+            totalAmount += (item.price as number) * (item.quantity as number);
         });
-        return this.totalAmount;
+        return totalAmount;
     }
 
     public calculateDiscount(): number {
-        this.totalAmount = this.calculateTotalAmount();
-         if (this.totalAmount > 30000) {
-            const discount = this.totalAmount * (10/100);
-            this.totalAmount = this.totalAmount - discount;
+        let totalAmount = this.calculateTotalAmount();
+         if (totalAmount > 30000) {
+            const discount = totalAmount * (10/100);
+            totalAmount = totalAmount - discount;
             }
-            return this.totalAmount;
+            return totalAmount;
     }
 }

@@ -13,7 +13,7 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     private readonly productRepository: ProductRepository
 ) {}
    
-    public async beforeRead(params: SalesOrderHeader): Promise<CreationPayloadValidationResults> {
+    public async beforeCreate(params: SalesOrderHeader): Promise<CreationPayloadValidationResults> {
         const products = await this.getProductsByIds(params);
         if (!products) {
          return {
