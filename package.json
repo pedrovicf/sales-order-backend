@@ -4,14 +4,20 @@
   "description": "A simple CAP project.",
   "dependencies": {
     "@sap/cds": "^9.4.3",
-    "express": "^4"
+    "@sap/cds-dk": "^9.4.3",
+    "axios": "^1.13.1",
+    "express": "^4",
+    "module-alias": "^2.2.3"
   },
   "devDependencies": {
     "@cap-js/cds-typer": "^0.38.0",
     "@cap-js/sqlite": "^2",
     "@eslint/js": "^9.38.0",
     "@sap/eslint-plugin-cds": "^4.1.0",
+    "@types/chai": "^5.2.3",
+    "@types/module-alias": "^2.0.4",
     "@types/node": "^24.9.0",
+    "chai": "^6.2.0",
     "eslint": "^9.38.0",
     "eslint-plugin-prettier": "^5.5.4",
     "git-commit-msg-linter": "^5.0.8",
