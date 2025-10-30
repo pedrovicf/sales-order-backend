@@ -1,4 +1,4 @@
-import { SalesOrderItemModel } from "./sales-order-item";
+import { SalesOrderItemModel } from './sales-order-item';
 
 type SalesOrderHeaderProps = {
     id: string;
@@ -26,15 +26,15 @@ export class SalesOrderHeaderModel {
 
     public static create(props: SalesOrderHeaderPropsWithoutIdAndTotalAmount): SalesOrderHeaderModel {
         return new SalesOrderHeaderModel({
-        ...props,
-        id: crypto.randomUUID(),
-        totalAmount: 0
+            ...props,
+            id: crypto.randomUUID(),
+            totalAmount: 0
         });
     }
 
-     public static with(props: SalesOrderHeaderProps): SalesOrderHeaderModel {
-            return new SalesOrderHeaderModel(props);
-        }
+    public static with(props: SalesOrderHeaderProps): SalesOrderHeaderModel {
+        return new SalesOrderHeaderModel(props);
+    }
         
 
 
@@ -51,8 +51,8 @@ export class SalesOrderHeaderModel {
         return this.props.totalAmount;
     }
 
-public get items() {
-    return this.props.items;
+    public get items() {
+        return this.props.items;
 
     }
 
@@ -72,11 +72,11 @@ public get items() {
         }
         return { 
             hasError: false
-        }
+        };
     }
 
-    private validateCustomerOnCreation(customerId: CreationPayload[`customer_id`]): CreationPayloadValidationResults {
-            if (!customerId) {
+    private validateCustomerOnCreation(customerId: CreationPayload['customer_id']): CreationPayloadValidationResults {
+        if (!customerId) {
             return {
                 hasError: true,
                 error: new Error('Customer inválido')
@@ -84,11 +84,11 @@ public get items() {
         }
         return {
             hasError: false
-        }
+        };
     }
 
     private validateItemsOnCreation(items: SalesOrderHeaderProps['items']): CreationPayloadValidationResults {
-                if (!items || items?.length === 0) {
+        if (!items || items?.length === 0) {
             return {
                 hasError: true,
                 error: new Error('itens inválidos')
@@ -103,16 +103,16 @@ public get items() {
             }
         });
         if(itemsErros.length > 0) {
-            const messages = itemsErros.join(`\n -`);
+            const messages = itemsErros.join('\n -');
             return {
                 hasError: true,
                 error: new Error(messages)
                 
-            }
+            };
         }
         return {
             hasError: false
-            }
+        };
     }
 
     public calculateTotalAmount(): number {
@@ -126,11 +126,11 @@ public get items() {
 
     public calculateDiscount(): number {
         let totalAmount = this.calculateTotalAmount();
-         if (totalAmount > 30000) {
+        if (totalAmount > 30000) {
             const discount = totalAmount * (10/100);
             totalAmount = totalAmount - discount;
-            }
-            return totalAmount;
+        }
+        return totalAmount;
     }
     public getProductsData(): { id: string; quantity: number }[] {
         return this.items.map(item => ({

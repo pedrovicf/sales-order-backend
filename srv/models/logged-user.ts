@@ -22,15 +22,15 @@ export class LoggedUserModel {
         return this.props.id;
     }
     
-   public get roles() {
+    public get roles() {
         return this.props.roles;
     }
 
-   public get attributes() {
+    public get attributes() {
         return this.props.attributes;
     }
 
-      public toStringifiedObject(): string {
+    public toStringifiedObject(): string {
         return JSON.stringify(this.props);
     }
 
