@@ -6,9 +6,9 @@ type SalesOrderItemProps = {
     quantity: number;
     price: number;
     products: ProductModel[];
-}
+};
 
-type SalesOrderItemPropsWithoutId = Omit<SalesOrderItemProps, 'id'> 
+type SalesOrderItemPropsWithoutId = Omit<SalesOrderItemProps, 'id'>;
 
 type CreationPayload = {
     product_id: SalesOrderItemProps['productId'];
@@ -23,11 +23,11 @@ export class SalesOrderItemModel {
     constructor(private props: SalesOrderItemProps) {}
 
     public static create(props: SalesOrderItemPropsWithoutId): SalesOrderItemModel {
-        return new SalesOrderItemModel ({
+        return new SalesOrderItemModel({
             ...props,
-            id: crypto.randomUUID(),
+            id: crypto.randomUUID()
         });
-    } 
+    }
 
     public get id() {
         return this.props.id;
@@ -44,20 +44,20 @@ export class SalesOrderItemModel {
     public get price() {
         return this.props.price;
     }
-    
+
     public get products() {
         return this.props.products;
     }
 
     public validateCreationPayload(params: CreationPayload): CreationPayloadValidationResults {
-        const product = this.products.find(product => product.id === params.product_id);
+        const product = this.products.find((product) => product.id === params.product_id);
         if (!product) {
             return {
                 hasError: true,
                 error: new Error(`Produto ${params.product_id} não encontrado`)
             };
         }
-        if (product.stock ===0) {
+        if (product.stock === 0) {
             return {
                 hasError: true,
                 error: new Error(`Produto ${product.name}(${product.id}) sem estoque disponível`)
@@ -66,7 +66,5 @@ export class SalesOrderItemModel {
         return {
             hasError: false
         };
-
     }
-
 }

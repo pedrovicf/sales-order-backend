@@ -14,9 +14,7 @@ export class CustomerRepositoryImpl implements CustomerRepository {
             id: dbcustomer?.id as string,
             firstName: dbcustomer?.firstName as string,
             lastName: dbcustomer?.lastName as string,
-            email: dbcustomer?.email as string 
-       
+            email: dbcustomer?.email as string
         });
-    }    
-        
+    }
 }

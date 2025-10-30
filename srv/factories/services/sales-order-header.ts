@@ -8,7 +8,7 @@ const makeSalesOrderHeaderService = (): SalesOrderHeaderService => {
     const customerRepository = new CustomerRepositoryImpl();
     const productRepository = new ProductRepositoryImpl();
     const salesOrderLogRepository = new SalesOrderLogRepositoryImpl();
-    return new SalesOrderHeaderServiceImpl(customerRepository, productRepository,salesOrderLogRepository );
+    return new SalesOrderHeaderServiceImpl(customerRepository, productRepository, salesOrderLogRepository);
 };
 
 export const salesOrderHeaderService = makeSalesOrderHeaderService();

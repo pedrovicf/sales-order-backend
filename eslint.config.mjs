@@ -1,5 +1,6 @@
 import globals from 'globals';
 import pluginJs from '@eslint/js';
+import prettier from 'eslint-plugin-prettier';
 import tseslint from 'typescript-eslint';
 
 export default [
@@ -13,8 +14,20 @@ export default [
     {
         ignores: ['./gen/*.{js,ts}'],
         files: ['**/*.{mjs,js,ts}'],
+        plugins: {
+          prettier
+        },
         rules: {
-            // Regra principal (foi corrigido o alinhamento das opções)
+            'prettier/prettier': [
+              'error',
+              {
+                singleQuote: true,
+                tabWidth: 4,
+                trailingComma: 'none',
+                bracketSpacing: true,
+                printWidth: 120
+              }
+            ],
             '@typescript-eslint/no-unused-vars' : [
                 'error',
                 {
@@ -23,7 +36,7 @@ export default [
                     ignoreRestSiblings: true
                 }
             ],
-            // Regras de estilo (indentação corrigida)
+           
             'eol-last': 'error',
             indent: [
                 'error',

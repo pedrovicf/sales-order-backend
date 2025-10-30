@@ -5,15 +5,12 @@ type SalesOrderHeaderProps = {
     customerId: string;
     totalAmount: number;
     items: SalesOrderItemModel[];
-}
+};
 
 type SalesOrderHeaderPropsWithoutIdAndTotalAmount = Omit<SalesOrderHeaderProps, 'id' | 'totalAmount'>;
 
-
-
 type CreationPayload = {
     customer_id: SalesOrderHeaderProps['customerId'];
-
 };
 
 type CreationPayloadValidationResults = {
@@ -35,10 +32,6 @@ export class SalesOrderHeaderModel {
     public static with(props: SalesOrderHeaderProps): SalesOrderHeaderModel {
         return new SalesOrderHeaderModel(props);
     }
-        
-
-
-
 
     public get id() {
         return this.props.id;
@@ -53,12 +46,10 @@ export class SalesOrderHeaderModel {
 
     public get items() {
         return this.props.items;
-
     }
 
     public set totalAmount(amount: number) {
         this.totalAmount = amount;
-
     }
 
     public validateCreationPayload(params: CreationPayload): CreationPayloadValidationResults {
@@ -67,10 +58,10 @@ export class SalesOrderHeaderModel {
             return customerValidationResult;
         }
         const itemsValidationResult = this.validateItemsOnCreation(this.items);
-        if (itemsValidationResult.hasError){
+        if (itemsValidationResult.hasError) {
             return itemsValidationResult;
         }
-        return { 
+        return {
             hasError: false
         };
     }
@@ -95,19 +86,17 @@ export class SalesOrderHeaderModel {
             };
         }
         const itemsErros: string[] = [];
-        items.forEach(item => {
+        items.forEach((item) => {
             const validationResult = item.validateCreationPayload({ product_id: item.productId });
             if (validationResult.hasError) {
                 itemsErros.push(validationResult.error?.message as string);
-
             }
         });
-        if(itemsErros.length > 0) {
+        if (itemsErros.length > 0) {
             const messages = itemsErros.join('\n -');
             return {
                 hasError: true,
                 error: new Error(messages)
-                
             };
         }
         return {
@@ -116,9 +105,8 @@ export class SalesOrderHeaderModel {
     }
 
     public calculateTotalAmount(): number {
-       
         let totalAmount = 0;
-        this.items.forEach(item => {
+        this.items.forEach((item) => {
             totalAmount += (item.price as number) * (item.quantity as number);
         });
         return totalAmount;
@@ -127,13 +115,13 @@ export class SalesOrderHeaderModel {
     public calculateDiscount(): number {
         let totalAmount = this.calculateTotalAmount();
         if (totalAmount > 30000) {
-            const discount = totalAmount * (10/100);
+            const discount = totalAmount * (10 / 100);
             totalAmount = totalAmount - discount;
         }
         return totalAmount;
     }
     public getProductsData(): { id: string; quantity: number }[] {
-        return this.items.map(item => ({
+        return this.items.map((item) => ({
             id: item.productId,
             quantity: item.quantity
         }));

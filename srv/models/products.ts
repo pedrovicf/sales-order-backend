@@ -1,4 +1,4 @@
-export type ProductProps =  {
+export type ProductProps = {
     id: string;
     name: string;
     price: number;
@@ -8,7 +8,7 @@ export type ProductProps =  {
 export type SellValidationResult = {
     hasError: boolean;
     error?: Error;
-}
+};
 
 export class ProductModel {
     constructor(private props: ProductProps) {}
@@ -33,7 +33,6 @@ export class ProductModel {
     public set stock(stock: number) {
         this.props.stock = stock;
     }
-
 
     public sell(amount: number): SellValidationResult {
         if (this.stock < amount) {

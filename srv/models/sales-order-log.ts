@@ -3,12 +3,11 @@ type SalesOrderLogProps = {
     headerId: string;
     userData: string;
     orderData: string;
+};
+type SalesOrderLogWithoutIdProps = Omit<SalesOrderLogProps, 'id'>;
 
-}
-type SalesOrderLogWithoutIdProps = Omit<SalesOrderLogProps, 'id'>; 
-  
 type SalesOrderLogDbProps = Omit<SalesOrderLogProps, 'headerId'> & {
-    header_id: string;   
+    header_id: string;
 };
 
 export class SalesOrderLogModel {
@@ -16,9 +15,8 @@ export class SalesOrderLogModel {
 
     public static create(props: SalesOrderLogWithoutIdProps): SalesOrderLogModel {
         return new SalesOrderLogModel({
-            ...props, 
+            ...props,
             id: crypto.randomUUID()
-        
         });
     }
 
@@ -33,19 +31,17 @@ export class SalesOrderLogModel {
     public get userData() {
         return this.props.userData;
     }
-        
+
     public get orderData() {
         return this.props.orderData;
     }
 
-
-    public toObject(): SalesOrderLogDbProps { 
-        return{
+    public toObject(): SalesOrderLogDbProps {
+        return {
             id: this.id,
             header_id: this.headerId,
             userData: this.userData,
-            orderData: this.orderData,
+            orderData: this.orderData
         };
     }
-
 }

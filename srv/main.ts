@@ -4,7 +4,6 @@ import { salesOrderHeaderController } from './factories/services/controllers/sal
 import { Customers, SalesOrderHeaders } from '@models/sales';
 import { Request, Service, User } from '@sap/cds';
 
-
 // 1. HANDLERS DE AUTORIZAÇÃO
 function handleAuth(service: Service) {
     // Handler 1: READ
@@ -39,16 +38,15 @@ function handleSalesOrderHooks(service: Service) {
         }
         request.data.totalAmount = result.totalAmount;
     });
-    
+
     // Handler 2: AFTER CREATE
     service.after('CREATE', 'SalesOrderHeaders', async (SalesOrderHeaders: SalesOrderHeaders, request: Request) => {
         await salesOrderHeaderController.afterCreate(SalesOrderHeaders, request.user as User);
     });
 }
 
-
 // FUNÇÃO PRINCIPAL (AGORA COM POUCAS LINHAS)
-export default (service: Service) => { 
+export default (service: Service) => {
     handleAuth(service);
     handleCustomerHooks(service);
     handleSalesOrderHooks(service);

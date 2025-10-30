@@ -3,7 +3,7 @@ import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
 
 export type CreationPayloadValidationResults = {
     hasError: boolean;
-    totalAmount?: number,
+    totalAmount?: number;
     error?: Error;
 };
 
