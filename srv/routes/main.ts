@@ -1,10 +1,10 @@
-import './configs/module-alias';
+import '../configs/module-alias';
 
 import { Request, Service, User } from '@sap/cds';
 
 import { Customers, SalesOrderHeaders } from '@models/sales';
 
-import { FullRequestParams } from '@/protocols';
+import { FullRequestParams } from '@/routes/protocols';
 import { customerController } from '@/factories/services/controllers/customer';
 import { salesOrderHeaderController } from '@/factories/services/controllers/sales-order-header';
 
