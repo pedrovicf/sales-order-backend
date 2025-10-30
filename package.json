@@ -13,8 +13,10 @@
     "@sap/eslint-plugin-cds": "^4.1.0",
     "@types/node": "^24.9.0",
     "eslint": "^9.38.0",
+    "eslint-plugin-prettier": "^5.5.4",
     "git-commit-msg-linter": "^5.0.8",
     "globals": "^16.4.0",
+    "prettier": "^3.6.2",
     "tsx": "^4.20.6",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.46.2"
