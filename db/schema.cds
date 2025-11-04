@@ -3,14 +3,16 @@ using { managed, User } from '@sap/cds/common';
 namespace  sales;
 
 entity SalesOrderHeaders {
-    key id: UUID;
-    customer: Association to Customers;
+    key id: UUID;   
     totalAmount: Decimal(15,2);
     createdAt  : Timestamp @cds.on.insert : $now;
     createdBy  : User      @cds.on.insert : $user;
     modifiedAt : Timestamp @cds.on.insert : $now  @cds.on.update : $now;
     modifiedBy : User      @cds.on.insert : $user @cds.on.update : $user;
+    customer: Association to Customers;
+    status: Association to SalesOrderStatuses;
     items: Composition of SalesOrderItems on items.header = $self; 
+ 
 }
 entity SalesOrderItems {
     key id: UUID;
@@ -26,6 +28,16 @@ entity SalesOrderLogs: managed {
         userData: LargeString;
         orderData: LargeString;
 }
+
+entity SalesOrderStatuses {
+    key id: String enum {
+        COMPLETED = 'COMPLETED';
+        PENDING = 'PENDING';
+        REJECTED = 'REJECTED';
+    };
+    description: localized String;
+}
+
 
 entity Customers {
     key id: UUID;
