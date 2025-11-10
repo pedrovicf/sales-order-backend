@@ -7,6 +7,7 @@ import { Customers, SalesOrderHeaders } from '@models/sales';
 import { FullRequestParams } from '@/routes/protocols';
 import { customerController } from '@/factories/services/controllers/customer';
 import { salesOrderHeaderController } from '@/factories/services/controllers/sales-order-header';
+import { salesReportController } from '@/factories/services/controllers/sales-report';
 
 // 1. HANDLERS DE AUTORIZAÇÃO
 function handleAuth(service: Service) {
@@ -46,6 +47,10 @@ function handleSalesOrderHooks(service: Service) {
     // Handler 2: AFTER CREATE
     service.after('CREATE', 'SalesOrderHeaders', async (SalesOrderHeaders: SalesOrderHeaders, request: Request) => {
         await salesOrderHeaderController.afterCreate(SalesOrderHeaders, request.user as User);
+    });
+    service.on('getSalesReportByDays', async (request: Request) => {
+        const days = request.data?.days || 7;
+        return salesReportController.findByDays(days);
     });
 }
 
