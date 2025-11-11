@@ -52,6 +52,10 @@ function handleSalesOrderHooks(service: Service) {
         const days = request.data?.days || 7;
         return salesReportController.findByDays(days);
     });
+    service.on('getSalesReportByCustomerId', async (request: Request) => {
+        const [{ id: customerId }] = request.params as unknown as { id: string }[];
+        return salesReportController.findByCustomerId(customerId);
+    });
 }
 
 // FUNÇÃO PRINCIPAL (AGORA COM POUCAS LINHAS)
