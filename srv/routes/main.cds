@@ -1,5 +1,5 @@
 using { sales } from '../../db/schema';
-using { db.types.SalesReport } from '../../db/types';
+using { db.types.SalesReport, db.types.BulkCreateSalesOrder } from '../../db/types';
 
 @requires: 'authenticated-user'
 //Entities
@@ -26,3 +26,9 @@ service MainService {
 }
 
 // Actions
+
+extend service  MainService with {
+    action bulkCreateSalesOrder(payload: array of BulkCreateSalesOrder.Payload) returns BulkCreateSalesOrder.ExpectedResult;
+    
+
+}
