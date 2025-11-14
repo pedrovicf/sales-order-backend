@@ -23,9 +23,6 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         private readonly salesOrderLogRepository: SalesOrderLogRepository
     ) {}
 
-    // =========================================================================
-    // MÉTODO beforeCreate (OTIMIZADO) - RESOLVE O ERRO max-lines-per-function
-    // =========================================================================
     public async beforeCreate(params: SalesOrderHeader): Promise<CreationPayloadValidationResult> {
         const productsValidationResult = await this.validateCustomerOnCreation(params);
         if (productsValidationResult.hasError) {
@@ -133,6 +130,23 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         await this.salesOrderHeaderRepository.bulkCreate(bulkCreateHeaders);
         await this.afterCreate(headers, loggedUser);
         return this.serializeBulkCreateResult(bulkCreateHeaders);
+    }
+
+    public async cloneSalesOrder(id: string, loggedUser: User): Promise<CreationPayloadValidationResult> {
+        const header = await this.salesOrderHeaderRepository.findCompleteSalesOrderById(id);
+        if (!header) {
+            return {
+                hasError: true,
+                error: new Error('Pedido não encontrado')
+            };
+        }
+        const headerValidationResult = header.validateCreationPayload({ customer_id: header.customerId });
+        if (headerValidationResult.hasError) {
+            return headerValidationResult;
+        }
+        await this.salesOrderHeaderRepository.bulkCreate([header]);
+        await this.afterCreate([header.toCreationObject()], loggedUser);
+        return this.serializeBulkCreateResult([header]);
     }
 
     private serializeBulkCreateResult(headers: SalesOrderHeaderModel[]): CreationPayloadValidationResult {

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines-per-function */
 import '../configs/module-alias';
 
 import { Request, Service, User } from '@sap/cds';
@@ -59,6 +60,11 @@ function handleSalesOrderHooks(service: Service) {
     service.on('bulkCreateSalesOrder', async (request: Request) => {
         const { user, data } = request;
         return salesOrderHeaderController.bulkCreate(data.payload, user);
+    });
+    service.on('cloneSalesOrder', async (request: Request) => {
+        const [{ id }] = request.params as unknown as { id: string }[];
+        const { user } = request;
+        return salesOrderHeaderController.cloneSalesOrder(id, user);
     });
 }
 // FUNÇÃO PRINCIPAL (AGORA COM POUCAS LINHAS)

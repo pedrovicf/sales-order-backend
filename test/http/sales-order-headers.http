@@ -108,3 +108,13 @@ Authorization: Basic pedro:130269
 
 GET http://{{localhost}}/SalesOrderHeaders?$search=4dvhl
 Authorization: Basic pedro:130269
+
+
+###
+# Funcionalidade de clonar pedidos
+
+POST http://{{localhost}}/SalesOrderHeaders(73657979-6585-4fc4-a81c-004656405c09)/cloneSalesOrder
+Authorization: Basic pedro:130269
+Content-Type: application/json
+
+{}
