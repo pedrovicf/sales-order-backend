@@ -12,6 +12,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "rootDir": "./",
+    "sourceMap": true,
     "paths": {
       "@models/*": ["./@cds-models/*/index.ts"],
       "@/*": ["./srv/*"]
