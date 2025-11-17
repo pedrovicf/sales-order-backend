@@ -1,20 +1,23 @@
+
+
 {
   "version": "0.2.0",
   "configurations": [
+    
     {
-      "name": "cds serve",
-      "request": "launch",
       "type": "node",
+      "request": "launch",
+      "name": "Debug app SalerOrder",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["cds-tsx", "watch"],
       "cwd": "${workspaceFolder}",
-      "runtimeExecutable": "cds",
-      "args": [
-        "serve",
-        "--with-mocks",
-        "--in-memory?"
-      ],
-      "skipFiles": [
-        "<node_internals>/**"
-      ]
+      "env": {
+        "NODE_ENV": "development"
+      },
+      "skipFiles": ["<node_internals>/**"],
+      "sourceMaps": true,
+      "console": "integratedTerminal",
+      "internalConsoleOptions": "neverOpen"
     }
   ]
 }
