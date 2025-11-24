@@ -30,6 +30,19 @@
                     }
                 }
             }
+        },
+        "[prodution]":{
+            "requires": {
+                "db": {
+                    "kind": "hana"
+                },
+                "uaa": {
+                    "kind": "xsuaa"
+                }
+            },
+            "hana": {
+                "deploy-format": "hdbtable"
+            }
         }
     }
     
