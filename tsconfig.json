@@ -1,14 +1,24 @@
 {
-
   "compilerOptions": {
     "target": "ES2024",
-    "module": "Node16",
-    "moduleResolution": "node16",
+    // Recomendado: Use CommonJS para o ambiente Node/CAP para evitar conflitos de módulos.
+    // Ou NodeNext/Node, mas Node16 é estrito.
+    "module": "CommonJS", 
+    "moduleResolution": "node", // CORRIGIDO: Usar "node" em vez de "node16" para melhor compatibilidade com libs antigas.
     
     "strict": true,
     "strictNullChecks": true,
     "noImplicitAny": false,
     "esModuleInterop": true,
+    
+    // NOVO: Adicionado para lidar com o erro TS1542 (embora a mudança para CommonJS geralmente resolva).
+    // Permite que módulos sem `export default` sejam importados via sintaxe de default.
+    "allowSyntheticDefaultImports": true, 
+    
+    // Adicionado: É uma boa prática desativar isso se você não está compilando para um bundler,
+    // pois a resolução de módulos do CAP é mais complexa.
+    "isolatedModules": false, 
+    
     "outDir": "./dist",
     "baseUrl": "./",
     "rootDir": "./",

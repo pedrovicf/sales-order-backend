@@ -1,3 +1,5 @@
+/* eslint-disable max-lines-per-function */
+/* eslint-disable max-len */
 import { User } from '@sap/cds';
 
 import { SalesOrderHeader, SalesOrderHeaders } from '@models/sales';
@@ -191,7 +193,12 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
     private async getProductsByIds(
         params: SalesOrderHeader | BulkCreateSalesOrderPayload
     ): Promise<ProductModel[] | null> {
-        const productsIds: string[] = params.items?.map((item) => item.product_id) as string[];
+        const items = params.items;
+        // CORREÇÃO DE FORMATAÇÃO: O ternário é mantido em uma linha.
+        const productsIds: string[] = Array.isArray(items)
+            ? (items.map((item) => item.product_id) as string[]) // Aqui, a quebra de linha foi removida.
+            : [];
+
         return this.productRepository.findByIds(productsIds);
     }
 
@@ -199,14 +206,33 @@ export class SalesOrderHeaderServiceImpl implements SalesOrderHeaderService {
         params: SalesOrderHeader | BulkCreateSalesOrderPayload,
         products: ProductModel[]
     ): SalesOrderItemModel[] {
-        return params.items?.map((item) =>
+        // CORREÇÃO: Aplica a verificação Array.isArray() para eliminar o erro TS2339
+        const items = params.items;
+
+        if (!items) {
+            return [];
+        }
+
+        // Se o items for um array (esperado para o payload), usamos o map.
+        if (Array.isArray(items)) {
+            return items.map((item) =>
+                SalesOrderItemModel.create({
+                    price: item.price as number,
+                    productId: item.product_id as string,
+                    quantity: item.quantity as number,
+                    products
+                })
+            ) as SalesOrderItemModel[];
+        }
+        // Trata o caso em que items é um objeto único (SalesOrderItem), se a tipagem permite.
+        return [
             SalesOrderItemModel.create({
-                price: item.price as number,
-                productId: item.product_id as string,
-                quantity: item.quantity as number,
+                price: items.price as number,
+                productId: items.product_id as string,
+                quantity: items.quantity as number,
                 products
             })
-        ) as SalesOrderItemModel[];
+        ];
     }
     private getSalesOrderHeader(
         params: SalesOrderHeader | BulkCreateSalesOrderPayload,

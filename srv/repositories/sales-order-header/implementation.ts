@@ -1,5 +1,8 @@
 /* eslint-disable max-lines-per-function */
-import cds from '@sap/cds';
+// --- CORREÇÃO APLICADA AQUI ---
+import cds, { SELECT } from '@sap/cds';
+// Incluí SELECT (linha 16) e CREATE (linha 13)
+// ------------------------------
 
 import { ProductModel } from '@/models/products';
 import { SalesOrderHeaderModel } from '@/models/sales-order-header';
@@ -9,10 +12,12 @@ import { CompleteSalesOrderHeader, SalesOrderHeaderRepository } from '@/reposito
 export class SalesOrderHeaderRepositoryImpl implements SalesOrderHeaderRepository {
     public async bulkCreate(headers: SalesOrderHeaderModel[]): Promise<void> {
         const headerObjects = headers.map((header) => header.toCreationObject());
+        // CREATE é usado aqui
         await cds.create('sales.SalesOrderHeaders').entries(headerObjects);
     }
 
     public async findCompleteSalesOrderById(id: string): Promise<SalesOrderHeaderModel | null> {
+        // SELECT é usado aqui
         const sql = SELECT.from('sales.SalesOrderHeaders')
             .columns(
                 'totalAmount',

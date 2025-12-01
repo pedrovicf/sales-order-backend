@@ -1,4 +1,6 @@
-import cds from '@sap/cds';
+// --- CORREÇÃO APLICADA AQUI ---
+import cds, { SELECT } from '@sap/cds';
+// ------------------------------
 
 import { ExpectedResult as SalesReportByDays } from '@models/db/types/SalesReportByDays';
 
@@ -15,6 +17,7 @@ export class SalesReportRepositoryImpl implements SalesReportRepository {
 
         console.log(today);
         console.log(subtractedDaysISOString);
+        // A função getReportBaseSql() que chama SELECT está aqui:
         const sql = this.getReportBaseSql().where({ createdAt: { between: subtractedDaysISOString, and: today } });
         const salesReports = await cds.run(sql);
         return this.mapReportResult(salesReports);
@@ -27,6 +30,7 @@ export class SalesReportRepositoryImpl implements SalesReportRepository {
     }
 
     private getReportBaseSql(): cds.ql.SELECT<unknown, unknown> {
+        // SELECT agora é reconhecido pelo TypeScript
         return SELECT.from('sales.SalesOrderHeaders').columns(
             'id as salesOrderId',
             'totalAmount as salesOrderTotalAmount',
