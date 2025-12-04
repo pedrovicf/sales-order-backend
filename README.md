@@ -20,7 +20,15 @@ File or Folder | Purpose
 - Start adding content, for example, a [db/schema.cds](db/schema.cds).
 
 
-## Learn More
-
-Learn more at https://cap.cloud.sap/docs/get-started/.
-
+## Debug mode sales-order-backend-service
+28 
+29 - cf enable-ssh sales-order-backend-service
+30 - cf restart sales-order-backend-service
+31 
+32 - cf ssh sales-order-backend-service
+33 - ps aux | grep node
+34 - kill -usr1 <PID> # enables the debug mode
+35 - ctrl + D
+36 - cf ssh -N -L 9229:127.0.0.1:9229 sales-order-backend-service
+37 - Access chrome://inspect
+38 - Access sources tab
